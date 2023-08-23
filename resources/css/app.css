@@ -1,4 +1,9 @@
-body {
-    height: 500px;
-    padding: 10%;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.font-standard{
+    font-family: inherit
 }
+
+

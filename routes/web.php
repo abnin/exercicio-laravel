@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::redirect('/', '/contacts');
+
+Route::redirect('/home', '/contacts');
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('contacts', ContactController::class, ['except' => ['index']]);
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/contatos', function () {
-    return view('contatos', ['name' => 'teste']);
-});
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/contatos', [App\Http\Controllers\ContatoController::class, 'listar'])->name('listar');
+require __DIR__.'/auth.php';
