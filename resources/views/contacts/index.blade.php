@@ -22,6 +22,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Email Address</th>
                                     <th width="10%">Action</th>
                                 </tr>
                             </thead>
@@ -30,6 +32,8 @@
                                     <tr>
                                         <td>{{ $contact->id }}</td>
                                         <td>{{ $contact->name }}</td>
+                                        <td>{{ $contact->phone_number }}</td>
+                                        <td>{{ $contact->email }}</td>
                                         <td class="text-sm uppercase">
                                             <form action="{{ route('contacts.destroy', $contact->id) }}" method="Post">
                                                 <div class="flex items-center gap-4">
